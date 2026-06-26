@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 120" width="800" height="120" fill="none" preserveAspectRatio="none">
+  <defs>
+    <linearGradient id="paperX" x1="0" y1="0" x2="800" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#d2a15a" stop-opacity="0.58"/>
+      <stop offset="0.045" stop-color="#f1d99f" stop-opacity="0.58"/>
+      <stop offset="0.18" stop-color="#fff4cf" stop-opacity="0.5"/>
+      <stop offset="0.72" stop-color="#fff0c4" stop-opacity="0.43"/>
+      <stop offset="1" stop-color="#d8a85f" stop-opacity="0.4"/>
+    </linearGradient>
+
+    <linearGradient id="paperY" x1="0" y1="0" x2="0" y2="120" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#8a5525" stop-opacity="0.13"/>
+      <stop offset="0.12" stop-color="#fff6d8" stop-opacity="0.36"/>
+      <stop offset="0.5" stop-color="#fff6d8" stop-opacity="0.2"/>
+      <stop offset="0.88" stop-color="#e4b971" stop-opacity="0.24"/>
+      <stop offset="1" stop-color="#8a5525" stop-opacity="0.12"/>
+    </linearGradient>
+
+    <linearGradient id="paperShadowY" x1="0" y1="0" x2="0" y2="120" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#4e3418" stop-opacity="0"/>
+      <stop offset="0.68" stop-color="#4e3418" stop-opacity="0"/>
+      <stop offset="0.82" stop-color="#4e3418" stop-opacity="0.12"/>
+      <stop offset="0.92" stop-color="#4e3418" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#4e3418" stop-opacity="0.34"/>
+    </linearGradient>
+
+    <filter id="paperGrain" x="0" y="0" width="800" height="120" filterUnits="userSpaceOnUse">
+      <feTurbulence type="fractalNoise" baseFrequency="0.018 0.12" numOctaves="3" seed="22" result="noise"/>
+      <feColorMatrix in="noise" type="matrix" values="
+        0 0 0 0 0.48
+        0 0 0 0 0.32
+        0 0 0 0 0.12
+        0 0 0 0.055 0" result="grain"/>
+      <feComposite in="grain" in2="SourceAlpha" operator="in" result="clippedGrain"/>
+      <feBlend in="SourceGraphic" in2="clippedGrain" mode="multiply"/>
+    </filter>
+
+    <filter id="paperShadowBlur" x="-20" y="0" width="840" height="150" filterUnits="userSpaceOnUse">
+      <feGaussianBlur stdDeviation="0.9"/>
+    </filter>
+
+    <path id="paperShape" d="M0 10
+      C65 7 120 12 190 9
+      C285 5 350 13 430 9
+      C535 5 620 12 800 8
+      L800 110
+      C700 114 620 107 520 111
+      C410 116 330 108 230 112
+      C135 116 70 108 0 113
+      Z"/>
+  </defs>
+
+  <!-- Shadow under the paper: only visible along the lower edge -->
+  <g filter="url(#paperShadowBlur)" opacity="0.9">
+    <use href="#paperShape" transform="translate(0 2.5)" fill="url(#paperShadowY)"/>
+  </g>
+
+  <g filter="url(#paperGrain)">
+    <use href="#paperShape" fill="url(#paperX)"/>
+    <use href="#paperShape" fill="url(#paperY)"/>
+  </g>
+</svg>
